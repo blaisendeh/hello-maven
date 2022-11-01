@@ -9,6 +9,11 @@ pipeline {
                sh 'mvn validate'
              }
          }
-     }
+     stages {
+         stage('unit test') {
+             steps {
+                sh 'mvn test'
+             }
+         }
 
 
