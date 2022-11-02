@@ -1,19 +1,24 @@
 pipeline {
-     agent any
-     options {
-         timeout(time: 10, unit: 'MINUTES')
-     }
-     stages {
-         stage('VALIDATE THE MAVEN PROJECT') {
-             steps {
-               sh 'mvn validate'
-             }
-         }
-     stages {
-         stage('unit test') {
-             steps {
-                sh 'mvn test'
-             }
-         }
-
-
+    agent any
+    options {
+        timeout(time: 10, unit: 'MINUTES')
+    }
+    stages {
+        // validate the code
+        stage('Validate maven project') {
+            steps {
+              sh 'mvn validate'
+            }
+        }
+        // Run unit test
+        stage('Run Unit Test') {
+            steps {
+              sh 'mvn test'
+            }
+        }
+        // Build the code
+        stage('Build maven project') {
+            steps {
+              sh 'mvn clean install'
+            }
+        }
